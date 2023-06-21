@@ -21,7 +21,12 @@ def binary_search(list: list, item) -> int:
 
 
 list = [1, 3, 5, 7, 9]
-item = int(input("Please enter the item to search for: "))
-print(list[binary_search(list, item)])
-
-# Things to do: Catch exception for when the item is the wrong data type. Same for return of 'None'
+try:
+    item = int(input("Please enter the item to search for: "))
+    if item == '': raise ValueError
+    if item not in list: raise TypeError
+    print(f'The item ({item}) you are looking for is found at index {binary_search(list, item)} of the list.')
+except TypeError:
+    print('Item not in list.')
+except ValueError:
+    print('A value error has occurred. Please check your entry.')
