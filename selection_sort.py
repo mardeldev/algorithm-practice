@@ -1,3 +1,5 @@
+
+#Loop through the array to find the smallest number.
 def findSmallestNumber(arr):
     smallest_index = 0
     smallest_num = arr[0]
@@ -7,6 +9,7 @@ def findSmallestNumber(arr):
             smallest_index = i
     return smallest_index
 
+#Do the above loop for each item in the array, remove the smallest number and append to a new list.
 def selectionSort(arr):
     sorted_list = []
     for i in range(len(arr)):
