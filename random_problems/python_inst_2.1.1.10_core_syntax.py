@@ -13,6 +13,7 @@ the __str__ method should return an HH:MM:SS string, where HH represents hours, 
 check the argument type, and in case of a mismatch, raise a TypeError exception.
 """
 
+
 class Time:
     def __init__(self, hrs, mins, secs):
         self.hours = hrs
@@ -20,28 +21,40 @@ class Time:
         self.seconds = secs
 
     def __add__(self, others):
-
-        if self.check_type(others):
-            return f'{self.hours + others.hours}h  {self.minutes + others.minutes}m {self.seconds + others.seconds}s'
+        match self.check_type(others):
+            case 'Time':
+                self.hours += others.hours
+                self.minutes += others.minutes
+                self.seconds += others.seconds
+                return self.__str__()
+            case 'int': 
+                self.seconds += others
+                return self.__str__()
 
     def __sub__(self, others):
-
-        if self.check_type(others):
-            return f'{self.hours - others.hours}h  {self.minutes - others.minutes}h {self.seconds - others.seconds}s'
+        match self.check_type(others):
+            case 'Time':
+                self.hours -= others.hours
+                self.minutes -= others.minutes
+                self.seconds -= others.seconds
+                return self.__str__()
+            case 'int':
+                self.seconds -= others
+                return self.__str__()
 
     def __str__(self):
         return '{0:02}:{1:02}:{2:02}'.format(self.hours, self.minutes, self.seconds)
 
     def check_type(self, others):
         if isinstance(others, Time):
-            return True
+            return 'Time'
+        elif isinstance(others, int):
+            return 'int'
         else:
             raise TypeError('Mismatch in object type')
 
 
 t1 = Time(2, 5, 30)
 t2 = Time(1, 1, 1)
-
 print(t1 + t2)
-print(t1 - t2)
-print(str(t2))
+print(t1 + 10)
