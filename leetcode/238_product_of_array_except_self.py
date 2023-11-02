@@ -5,14 +5,15 @@ class Solution:
         pre = 1
         for i in range(len(nums)):
             res[i] *= pre
-            pre = res[i] * nums[i]
+            pre *= nums[i]
         # postfix:
         post = 1
-        for x in range(len(nums) -1, -1, -1):
+        for x in range(len(nums) - 1, -1, -1):
             res[x] *= post
             post *= nums[x]
-
         return res
+
+
 
 nums = [1, 2, 3, 4]
 s = Solution()
